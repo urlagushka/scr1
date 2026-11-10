@@ -1,0 +1,1382 @@
+
+/Users/urlagushka/Documents/ITMO/scr1/build/verilator_wf_AHB_MAX_imc_IPIC_1_TCM_1_VIRQ_1_TRACE_1/illegal.elf:     формат файла elf32-littleriscv
+/Users/urlagushka/Documents/ITMO/scr1/build/verilator_wf_AHB_MAX_imc_IPIC_1_TCM_1_VIRQ_1_TRACE_1/illegal.elf
+архитектура: riscv:rv32, флаги 0x00000112:
+EXEC_P, HAS_SYMS, D_PAGED
+начальный адрес 0x00002000
+
+Program Header:
+0x70000003 off    0x00003bc8 vaddr 0x00000000 paddr 0x00000000 align 2**0
+         filesz 0x00000059 memsz 0x00000000 flags r--
+    LOAD off    0x00001000 vaddr 0x00000000 paddr 0x00000000 align 2**12
+         filesz 0x00002bc8 memsz 0x00002be0 flags rwx
+    LOAD off    0x00000c00 vaddr 0x0000fc00 paddr 0x0000fc00 align 2**12
+         filesz 0x00000000 memsz 0x00000400 flags rw-
+
+Разделы:
+Idx Name              Разм      VMA       LMA       Фа  смещ.  Выр.  Флаги
+  0 .text.init        000026ce  00000000  00000000  00001000  2**11  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .text             00000440  00002700  00002700  00003700  2**8  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .data             00000020  00002b40  00002b40  00003b40  2**4  CONTENTS, ALLOC, LOAD, DATA
+  3 .tohost           00000048  00002b80  00002b80  00003b80  2**6  CONTENTS, ALLOC, LOAD, DATA
+  4 .sdata            00000018  00002bc8  00002bc8  00003bc8  2**0  ALLOC
+  5 .tdata            00000000  00002be0  00002be0  00003bc8  2**0  CONTENTS, ALLOC, LOAD, DATA, THREAD_LOCAL
+  6 .tbss             00000000  00002be0  00002be0  00000000  2**0  ALLOC, THREAD_LOCAL
+  7 .bss              00000000  00002be0  00002be0  00003bc8  2**0  ALLOC
+  8 .stack            00000400  0000fc00  0000fc00  00003c00  2**0  ALLOC
+  9 .riscv.attributes 00000059  00000000  00000000  00003bc8  2**0  CONTENTS, READONLY
+SYMBOL TABLE:
+00000000 l    d  .text.init	00000000 .text.init
+00002700 l    d  .text	00000000 .text
+00002b40 l    d  .data	00000000 .data
+00002b80 l    d  .tohost	00000000 .tohost
+00002bc8 l    d  .sdata	00000000 .sdata
+00002be0 l    d  .tdata	00000000 .tdata
+00002be0 l    d  .tbss	00000000 .tbss
+00002be0 l    d  .bss	00000000 .bss
+0000fc00 l    d  .stack	00000000 .stack
+00000000 l    d  .riscv.attributes	00000000 .riscv.attributes
+00000000 l    df *ABS*	00000000 illegal.o
+00002b00 l       .text	00000000 sc_exit
+00001880 l       .text.init	00000000 trap_vector
+000018ee l       .text.init	00000000 _report
+000018ec l       .text.init	00000000 handle_exception
+000018ec l       .text.init	00000000 other_exception
+00002700 l       .text	00000000 _run_test
+00002704 l       .text	00000000 bad2
+000027fc l       .text	00000000 fail
+0000280c l       .text	00000000 pass
+00002730 l       .text	00000000 test_vectored_interrupts
+00002758 l       .text	00000000 msip
+0000278c l       .text	00000000 bad3
+00002794 l       .text	00000000 bad4
+000027a4 l       .text	00000000 bad5
+000027ac l       .text	00000000 bad6
+000027b4 l       .text	00000000 bad7
+000027dc l       .text	00000000 bad8
+000027f0 l       .text	00000000 bad9
+00002940 l       .text	00000000 synchronous_exception
+00002a08 l       .text	00000000 ecall
+00000400 g       *ABS*	00000000 STACK_SIZE
+000033c8 g       .sdata	00000000 __global_pointer$
+00002b60 g       .data	00000000 end_signature
+00002b40 g       .data	00000000 begin_regstate
+00002b60 g       .data	00000000 begin_signature
+00002000 g       .text.init	00000000 _start
+00000020 g       *ABS*	00000000 CL_SIZE
+000000f8 g       .text.init	00000000 SIM_STOP
+00002900  w      .text	00000000 mtvec_handler
+00002be0 g       .bss	00000000 _end
+00002bc0 g       .tohost	00000000 fromhost
+00002b80 g       .tohost	00000000 tohost
+000000f4 g       .text.init	00000000 SIM_EXIT
+
+
+
+Дизассемблирование раздела .text.init:
+
+00000000 <SIM_EXIT-0xf4>:
+	...
+
+000000f4 <SIM_EXIT>:
+      f4:	00000013          	nop
+
+000000f8 <SIM_STOP>:
+      f8:	0000006f          	j	f8 <SIM_STOP>
+      fc:	ffff                	.insn	2, 0xffff
+      fe:	ffff                	.insn	2, 0xffff
+	...
+
+00001880 <trap_vector>:
+    1880:	34202773          	csrr	a4,mcause
+    1884:	47a1                	li	a5,8
+    1886:	06f70463          	beq	a4,a5,18ee <_report>
+    188a:	47a5                	li	a5,9
+    188c:	06f70163          	beq	a4,a5,18ee <_report>
+    1890:	47ad                	li	a5,11
+    1892:	04f70e63          	beq	a4,a5,18ee <_report>
+    1896:	4789                	li	a5,2
+    1898:	02f71f63          	bne	a4,a5,18d6 <trap_vector+0x56>
+    189c:	f00007b7          	lui	a5,0xf0000
+    18a0:	06900713          	li	a4,105
+    18a4:	00e78023          	sb	a4,0(a5) # f0000000 <__global_pointer$+0xefffcc38>
+    18a8:	06c00713          	li	a4,108
+    18ac:	00e78023          	sb	a4,0(a5)
+    18b0:	06c00713          	li	a4,108
+    18b4:	00e78023          	sb	a4,0(a5)
+    18b8:	06500713          	li	a4,101
+    18bc:	00e78023          	sb	a4,0(a5)
+    18c0:	07800713          	li	a4,120
+    18c4:	00e78023          	sb	a4,0(a5)
+    18c8:	06300713          	li	a4,99
+    18cc:	00e78023          	sb	a4,0(a5)
+    18d0:	4729                	li	a4,10
+    18d2:	00e78023          	sb	a4,0(a5)
+    18d6:	00001717          	auipc	a4,0x1
+    18da:	02a70713          	addi	a4,a4,42 # 2900 <mtvec_handler>
+    18de:	c311                	beqz	a4,18e2 <trap_vector+0x62>
+    18e0:	8702                	jr	a4
+    18e2:	34202773          	csrr	a4,mcause
+    18e6:	00075363          	bgez	a4,18ec <handle_exception>
+    18ea:	a009                	j	18ec <handle_exception>
+
+000018ec <handle_exception>:
+    18ec:	4505                	li	a0,1
+
+000018ee <_report>:
+    18ee:	2120106f          	j	2b00 <sc_exit>
+    18f2:	00000013          	nop
+    18f6:	00000013          	nop
+    18fa:	00000013          	nop
+    18fe:	00000013          	nop
+    1902:	00000013          	nop
+    1906:	00000013          	nop
+    190a:	00000013          	nop
+    190e:	00000013          	nop
+    1912:	00000013          	nop
+    1916:	00000013          	nop
+    191a:	00000013          	nop
+    191e:	00000013          	nop
+    1922:	00000013          	nop
+    1926:	00000013          	nop
+    192a:	00000013          	nop
+    192e:	00000013          	nop
+    1932:	00000013          	nop
+    1936:	00000013          	nop
+    193a:	00000013          	nop
+    193e:	00000013          	nop
+    1942:	00000013          	nop
+    1946:	00000013          	nop
+    194a:	00000013          	nop
+    194e:	00000013          	nop
+    1952:	00000013          	nop
+    1956:	00000013          	nop
+    195a:	00000013          	nop
+    195e:	00000013          	nop
+    1962:	00000013          	nop
+    1966:	00000013          	nop
+    196a:	00000013          	nop
+    196e:	00000013          	nop
+    1972:	00000013          	nop
+    1976:	00000013          	nop
+    197a:	00000013          	nop
+    197e:	00000013          	nop
+    1982:	00000013          	nop
+    1986:	00000013          	nop
+    198a:	00000013          	nop
+    198e:	00000013          	nop
+    1992:	00000013          	nop
+    1996:	00000013          	nop
+    199a:	00000013          	nop
+    199e:	00000013          	nop
+    19a2:	00000013          	nop
+    19a6:	00000013          	nop
+    19aa:	00000013          	nop
+    19ae:	00000013          	nop
+    19b2:	00000013          	nop
+    19b6:	00000013          	nop
+    19ba:	00000013          	nop
+    19be:	00000013          	nop
+    19c2:	00000013          	nop
+    19c6:	00000013          	nop
+    19ca:	00000013          	nop
+    19ce:	00000013          	nop
+    19d2:	00000013          	nop
+    19d6:	00000013          	nop
+    19da:	00000013          	nop
+    19de:	00000013          	nop
+    19e2:	00000013          	nop
+    19e6:	00000013          	nop
+    19ea:	00000013          	nop
+    19ee:	00000013          	nop
+    19f2:	00000013          	nop
+    19f6:	00000013          	nop
+    19fa:	00000013          	nop
+    19fe:	00000013          	nop
+    1a02:	00000013          	nop
+    1a06:	00000013          	nop
+    1a0a:	00000013          	nop
+    1a0e:	00000013          	nop
+    1a12:	00000013          	nop
+    1a16:	00000013          	nop
+    1a1a:	00000013          	nop
+    1a1e:	00000013          	nop
+    1a22:	00000013          	nop
+    1a26:	00000013          	nop
+    1a2a:	00000013          	nop
+    1a2e:	00000013          	nop
+    1a32:	00000013          	nop
+    1a36:	00000013          	nop
+    1a3a:	00000013          	nop
+    1a3e:	00000013          	nop
+    1a42:	00000013          	nop
+    1a46:	00000013          	nop
+    1a4a:	00000013          	nop
+    1a4e:	00000013          	nop
+    1a52:	00000013          	nop
+    1a56:	00000013          	nop
+    1a5a:	00000013          	nop
+    1a5e:	00000013          	nop
+    1a62:	00000013          	nop
+    1a66:	00000013          	nop
+    1a6a:	00000013          	nop
+    1a6e:	00000013          	nop
+    1a72:	00000013          	nop
+    1a76:	00000013          	nop
+    1a7a:	00000013          	nop
+    1a7e:	00000013          	nop
+    1a82:	00000013          	nop
+    1a86:	00000013          	nop
+    1a8a:	00000013          	nop
+    1a8e:	00000013          	nop
+    1a92:	00000013          	nop
+    1a96:	00000013          	nop
+    1a9a:	00000013          	nop
+    1a9e:	00000013          	nop
+    1aa2:	00000013          	nop
+    1aa6:	00000013          	nop
+    1aaa:	00000013          	nop
+    1aae:	00000013          	nop
+    1ab2:	00000013          	nop
+    1ab6:	00000013          	nop
+    1aba:	00000013          	nop
+    1abe:	00000013          	nop
+    1ac2:	00000013          	nop
+    1ac6:	00000013          	nop
+    1aca:	00000013          	nop
+    1ace:	00000013          	nop
+    1ad2:	00000013          	nop
+    1ad6:	00000013          	nop
+    1ada:	00000013          	nop
+    1ade:	00000013          	nop
+    1ae2:	00000013          	nop
+    1ae6:	00000013          	nop
+    1aea:	00000013          	nop
+    1aee:	00000013          	nop
+    1af2:	00000013          	nop
+    1af6:	00000013          	nop
+    1afa:	00000013          	nop
+    1afe:	00000013          	nop
+    1b02:	00000013          	nop
+    1b06:	00000013          	nop
+    1b0a:	00000013          	nop
+    1b0e:	00000013          	nop
+    1b12:	00000013          	nop
+    1b16:	00000013          	nop
+    1b1a:	00000013          	nop
+    1b1e:	00000013          	nop
+    1b22:	00000013          	nop
+    1b26:	00000013          	nop
+    1b2a:	00000013          	nop
+    1b2e:	00000013          	nop
+    1b32:	00000013          	nop
+    1b36:	00000013          	nop
+    1b3a:	00000013          	nop
+    1b3e:	00000013          	nop
+    1b42:	00000013          	nop
+    1b46:	00000013          	nop
+    1b4a:	00000013          	nop
+    1b4e:	00000013          	nop
+    1b52:	00000013          	nop
+    1b56:	00000013          	nop
+    1b5a:	00000013          	nop
+    1b5e:	00000013          	nop
+    1b62:	00000013          	nop
+    1b66:	00000013          	nop
+    1b6a:	00000013          	nop
+    1b6e:	00000013          	nop
+    1b72:	00000013          	nop
+    1b76:	00000013          	nop
+    1b7a:	00000013          	nop
+    1b7e:	00000013          	nop
+    1b82:	00000013          	nop
+    1b86:	00000013          	nop
+    1b8a:	00000013          	nop
+    1b8e:	00000013          	nop
+    1b92:	00000013          	nop
+    1b96:	00000013          	nop
+    1b9a:	00000013          	nop
+    1b9e:	00000013          	nop
+    1ba2:	00000013          	nop
+    1ba6:	00000013          	nop
+    1baa:	00000013          	nop
+    1bae:	00000013          	nop
+    1bb2:	00000013          	nop
+    1bb6:	00000013          	nop
+    1bba:	00000013          	nop
+    1bbe:	00000013          	nop
+    1bc2:	00000013          	nop
+    1bc6:	00000013          	nop
+    1bca:	00000013          	nop
+    1bce:	00000013          	nop
+    1bd2:	00000013          	nop
+    1bd6:	00000013          	nop
+    1bda:	00000013          	nop
+    1bde:	00000013          	nop
+    1be2:	00000013          	nop
+    1be6:	00000013          	nop
+    1bea:	00000013          	nop
+    1bee:	00000013          	nop
+    1bf2:	00000013          	nop
+    1bf6:	00000013          	nop
+    1bfa:	00000013          	nop
+    1bfe:	00000013          	nop
+    1c02:	00000013          	nop
+    1c06:	00000013          	nop
+    1c0a:	00000013          	nop
+    1c0e:	00000013          	nop
+    1c12:	00000013          	nop
+    1c16:	00000013          	nop
+    1c1a:	00000013          	nop
+    1c1e:	00000013          	nop
+    1c22:	00000013          	nop
+    1c26:	00000013          	nop
+    1c2a:	00000013          	nop
+    1c2e:	00000013          	nop
+    1c32:	00000013          	nop
+    1c36:	00000013          	nop
+    1c3a:	00000013          	nop
+    1c3e:	00000013          	nop
+    1c42:	00000013          	nop
+    1c46:	00000013          	nop
+    1c4a:	00000013          	nop
+    1c4e:	00000013          	nop
+    1c52:	00000013          	nop
+    1c56:	00000013          	nop
+    1c5a:	00000013          	nop
+    1c5e:	00000013          	nop
+    1c62:	00000013          	nop
+    1c66:	00000013          	nop
+    1c6a:	00000013          	nop
+    1c6e:	00000013          	nop
+    1c72:	00000013          	nop
+    1c76:	00000013          	nop
+    1c7a:	00000013          	nop
+    1c7e:	00000013          	nop
+    1c82:	00000013          	nop
+    1c86:	00000013          	nop
+    1c8a:	00000013          	nop
+    1c8e:	00000013          	nop
+    1c92:	00000013          	nop
+    1c96:	00000013          	nop
+    1c9a:	00000013          	nop
+    1c9e:	00000013          	nop
+    1ca2:	00000013          	nop
+    1ca6:	00000013          	nop
+    1caa:	00000013          	nop
+    1cae:	00000013          	nop
+    1cb2:	00000013          	nop
+    1cb6:	00000013          	nop
+    1cba:	00000013          	nop
+    1cbe:	00000013          	nop
+    1cc2:	00000013          	nop
+    1cc6:	00000013          	nop
+    1cca:	00000013          	nop
+    1cce:	00000013          	nop
+    1cd2:	00000013          	nop
+    1cd6:	00000013          	nop
+    1cda:	00000013          	nop
+    1cde:	00000013          	nop
+    1ce2:	00000013          	nop
+    1ce6:	00000013          	nop
+    1cea:	00000013          	nop
+    1cee:	00000013          	nop
+    1cf2:	00000013          	nop
+    1cf6:	00000013          	nop
+    1cfa:	00000013          	nop
+    1cfe:	00000013          	nop
+    1d02:	00000013          	nop
+    1d06:	00000013          	nop
+    1d0a:	00000013          	nop
+    1d0e:	00000013          	nop
+    1d12:	00000013          	nop
+    1d16:	00000013          	nop
+    1d1a:	00000013          	nop
+    1d1e:	00000013          	nop
+    1d22:	00000013          	nop
+    1d26:	00000013          	nop
+    1d2a:	00000013          	nop
+    1d2e:	00000013          	nop
+    1d32:	00000013          	nop
+    1d36:	00000013          	nop
+    1d3a:	00000013          	nop
+    1d3e:	00000013          	nop
+    1d42:	00000013          	nop
+    1d46:	00000013          	nop
+    1d4a:	00000013          	nop
+    1d4e:	00000013          	nop
+    1d52:	00000013          	nop
+    1d56:	00000013          	nop
+    1d5a:	00000013          	nop
+    1d5e:	00000013          	nop
+    1d62:	00000013          	nop
+    1d66:	00000013          	nop
+    1d6a:	00000013          	nop
+    1d6e:	00000013          	nop
+    1d72:	00000013          	nop
+    1d76:	00000013          	nop
+    1d7a:	00000013          	nop
+    1d7e:	00000013          	nop
+    1d82:	00000013          	nop
+    1d86:	00000013          	nop
+    1d8a:	00000013          	nop
+    1d8e:	00000013          	nop
+    1d92:	00000013          	nop
+    1d96:	00000013          	nop
+    1d9a:	00000013          	nop
+    1d9e:	00000013          	nop
+    1da2:	00000013          	nop
+    1da6:	00000013          	nop
+    1daa:	00000013          	nop
+    1dae:	00000013          	nop
+    1db2:	00000013          	nop
+    1db6:	00000013          	nop
+    1dba:	00000013          	nop
+    1dbe:	00000013          	nop
+    1dc2:	00000013          	nop
+    1dc6:	00000013          	nop
+    1dca:	00000013          	nop
+    1dce:	00000013          	nop
+    1dd2:	00000013          	nop
+    1dd6:	00000013          	nop
+    1dda:	00000013          	nop
+    1dde:	00000013          	nop
+    1de2:	00000013          	nop
+    1de6:	00000013          	nop
+    1dea:	00000013          	nop
+    1dee:	00000013          	nop
+    1df2:	00000013          	nop
+    1df6:	00000013          	nop
+    1dfa:	00000013          	nop
+    1dfe:	00000013          	nop
+    1e02:	00000013          	nop
+    1e06:	00000013          	nop
+    1e0a:	00000013          	nop
+    1e0e:	00000013          	nop
+    1e12:	00000013          	nop
+    1e16:	00000013          	nop
+    1e1a:	00000013          	nop
+    1e1e:	00000013          	nop
+    1e22:	00000013          	nop
+    1e26:	00000013          	nop
+    1e2a:	00000013          	nop
+    1e2e:	00000013          	nop
+    1e32:	00000013          	nop
+    1e36:	00000013          	nop
+    1e3a:	00000013          	nop
+    1e3e:	00000013          	nop
+    1e42:	00000013          	nop
+    1e46:	00000013          	nop
+    1e4a:	00000013          	nop
+    1e4e:	00000013          	nop
+    1e52:	00000013          	nop
+    1e56:	00000013          	nop
+    1e5a:	00000013          	nop
+    1e5e:	00000013          	nop
+    1e62:	00000013          	nop
+    1e66:	00000013          	nop
+    1e6a:	00000013          	nop
+    1e6e:	00000013          	nop
+    1e72:	00000013          	nop
+    1e76:	00000013          	nop
+    1e7a:	00000013          	nop
+    1e7e:	00000013          	nop
+    1e82:	00000013          	nop
+    1e86:	00000013          	nop
+    1e8a:	00000013          	nop
+    1e8e:	00000013          	nop
+    1e92:	00000013          	nop
+    1e96:	00000013          	nop
+    1e9a:	00000013          	nop
+    1e9e:	00000013          	nop
+    1ea2:	00000013          	nop
+    1ea6:	00000013          	nop
+    1eaa:	00000013          	nop
+    1eae:	00000013          	nop
+    1eb2:	00000013          	nop
+    1eb6:	00000013          	nop
+    1eba:	00000013          	nop
+    1ebe:	00000013          	nop
+    1ec2:	00000013          	nop
+    1ec6:	00000013          	nop
+    1eca:	00000013          	nop
+    1ece:	00000013          	nop
+    1ed2:	00000013          	nop
+    1ed6:	00000013          	nop
+    1eda:	00000013          	nop
+    1ede:	00000013          	nop
+    1ee2:	00000013          	nop
+    1ee6:	00000013          	nop
+    1eea:	00000013          	nop
+    1eee:	00000013          	nop
+    1ef2:	00000013          	nop
+    1ef6:	00000013          	nop
+    1efa:	00000013          	nop
+    1efe:	00000013          	nop
+    1f02:	00000013          	nop
+    1f06:	00000013          	nop
+    1f0a:	00000013          	nop
+    1f0e:	00000013          	nop
+    1f12:	00000013          	nop
+    1f16:	00000013          	nop
+    1f1a:	00000013          	nop
+    1f1e:	00000013          	nop
+    1f22:	00000013          	nop
+    1f26:	00000013          	nop
+    1f2a:	00000013          	nop
+    1f2e:	00000013          	nop
+    1f32:	00000013          	nop
+    1f36:	00000013          	nop
+    1f3a:	00000013          	nop
+    1f3e:	00000013          	nop
+    1f42:	00000013          	nop
+    1f46:	00000013          	nop
+    1f4a:	00000013          	nop
+    1f4e:	00000013          	nop
+    1f52:	00000013          	nop
+    1f56:	00000013          	nop
+    1f5a:	00000013          	nop
+    1f5e:	00000013          	nop
+    1f62:	00000013          	nop
+    1f66:	00000013          	nop
+    1f6a:	00000013          	nop
+    1f6e:	00000013          	nop
+    1f72:	00000013          	nop
+    1f76:	00000013          	nop
+    1f7a:	00000013          	nop
+    1f7e:	00000013          	nop
+    1f82:	00000013          	nop
+    1f86:	00000013          	nop
+    1f8a:	00000013          	nop
+    1f8e:	00000013          	nop
+    1f92:	00000013          	nop
+    1f96:	00000013          	nop
+    1f9a:	00000013          	nop
+    1f9e:	00000013          	nop
+    1fa2:	00000013          	nop
+    1fa6:	00000013          	nop
+    1faa:	00000013          	nop
+    1fae:	00000013          	nop
+    1fb2:	00000013          	nop
+    1fb6:	00000013          	nop
+    1fba:	00000013          	nop
+    1fbe:	00000013          	nop
+    1fc2:	00000013          	nop
+    1fc6:	00000013          	nop
+    1fca:	00000013          	nop
+    1fce:	00000013          	nop
+    1fd2:	00000013          	nop
+    1fd6:	00000013          	nop
+    1fda:	00000013          	nop
+    1fde:	00000013          	nop
+    1fe2:	00000013          	nop
+    1fe6:	00000013          	nop
+    1fea:	00000013          	nop
+    1fee:	00000013          	nop
+    1ff2:	00000013          	nop
+    1ff6:	00000013          	nop
+    1ffa:	00000013          	nop
+    1ffe:	0001                	nop
+
+00002000 <_start>:
+    2000:	f1402573          	csrr	a0,mhartid
+    2004:	e101                	bnez	a0,2004 <_start+0x4>
+    2006:	4e01                	li	t3,0
+    2008:	00000297          	auipc	t0,0x0
+    200c:	87828293          	addi	t0,t0,-1928 # 1880 <trap_vector>
+    2010:	30529073          	csrw	mtvec,t0
+    2014:	4505                	li	a0,1
+    2016:	057e                	slli	a0,a0,0x1f
+    2018:	00054863          	bltz	a0,2028 <_start+0x28>
+    201c:	0ff0000f          	fence
+    2020:	85f2                	mv	a1,t3
+    2022:	4501                	li	a0,0
+    2024:	00000073          	ecall
+    2028:	00000293          	li	t0,0
+    202c:	00028d63          	beqz	t0,2046 <_start+0x46>
+    2030:	10529073          	csrw	stvec,t0
+    2034:	62ad                	lui	t0,0xb
+    2036:	10928293          	addi	t0,t0,265 # b109 <__global_pointer$+0x7d41>
+    203a:	30229073          	csrw	medeleg,t0
+    203e:	30202373          	csrr	t1,medeleg
+    2042:	8a6295e3          	bne	t0,t1,18ec <handle_exception>
+    2046:	30005073          	csrwi	mstatus,0
+    204a:	6509                	lui	a0,0x2
+    204c:	80050513          	addi	a0,a0,-2048 # 1800 <STACK_SIZE+0x1400>
+    2050:	30052073          	csrs	mstatus,a0
+    2054:	00000297          	auipc	t0,0x0
+    2058:	6ac28293          	addi	t0,t0,1708 # 2700 <_run_test>
+    205c:	34129073          	csrw	mepc,t0
+    2060:	f1402573          	csrr	a0,mhartid
+    2064:	30200073          	mret
+    2068:	0001                	nop
+    206a:	00000013          	nop
+    206e:	00000013          	nop
+    2072:	00000013          	nop
+    2076:	00000013          	nop
+    207a:	00000013          	nop
+    207e:	00000013          	nop
+    2082:	00000013          	nop
+    2086:	00000013          	nop
+    208a:	00000013          	nop
+    208e:	00000013          	nop
+    2092:	00000013          	nop
+    2096:	00000013          	nop
+    209a:	00000013          	nop
+    209e:	00000013          	nop
+    20a2:	00000013          	nop
+    20a6:	00000013          	nop
+    20aa:	00000013          	nop
+    20ae:	00000013          	nop
+    20b2:	00000013          	nop
+    20b6:	00000013          	nop
+    20ba:	00000013          	nop
+    20be:	00000013          	nop
+    20c2:	00000013          	nop
+    20c6:	00000013          	nop
+    20ca:	00000013          	nop
+    20ce:	00000013          	nop
+    20d2:	00000013          	nop
+    20d6:	00000013          	nop
+    20da:	00000013          	nop
+    20de:	00000013          	nop
+    20e2:	00000013          	nop
+    20e6:	00000013          	nop
+    20ea:	00000013          	nop
+    20ee:	00000013          	nop
+    20f2:	00000013          	nop
+    20f6:	00000013          	nop
+    20fa:	00000013          	nop
+    20fe:	00000013          	nop
+    2102:	00000013          	nop
+    2106:	00000013          	nop
+    210a:	00000013          	nop
+    210e:	00000013          	nop
+    2112:	00000013          	nop
+    2116:	00000013          	nop
+    211a:	00000013          	nop
+    211e:	00000013          	nop
+    2122:	00000013          	nop
+    2126:	00000013          	nop
+    212a:	00000013          	nop
+    212e:	00000013          	nop
+    2132:	00000013          	nop
+    2136:	00000013          	nop
+    213a:	00000013          	nop
+    213e:	00000013          	nop
+    2142:	00000013          	nop
+    2146:	00000013          	nop
+    214a:	00000013          	nop
+    214e:	00000013          	nop
+    2152:	00000013          	nop
+    2156:	00000013          	nop
+    215a:	00000013          	nop
+    215e:	00000013          	nop
+    2162:	00000013          	nop
+    2166:	00000013          	nop
+    216a:	00000013          	nop
+    216e:	00000013          	nop
+    2172:	00000013          	nop
+    2176:	00000013          	nop
+    217a:	00000013          	nop
+    217e:	00000013          	nop
+    2182:	00000013          	nop
+    2186:	00000013          	nop
+    218a:	00000013          	nop
+    218e:	00000013          	nop
+    2192:	00000013          	nop
+    2196:	00000013          	nop
+    219a:	00000013          	nop
+    219e:	00000013          	nop
+    21a2:	00000013          	nop
+    21a6:	00000013          	nop
+    21aa:	00000013          	nop
+    21ae:	00000013          	nop
+    21b2:	00000013          	nop
+    21b6:	00000013          	nop
+    21ba:	00000013          	nop
+    21be:	00000013          	nop
+    21c2:	00000013          	nop
+    21c6:	00000013          	nop
+    21ca:	00000013          	nop
+    21ce:	00000013          	nop
+    21d2:	00000013          	nop
+    21d6:	00000013          	nop
+    21da:	00000013          	nop
+    21de:	00000013          	nop
+    21e2:	00000013          	nop
+    21e6:	00000013          	nop
+    21ea:	00000013          	nop
+    21ee:	00000013          	nop
+    21f2:	00000013          	nop
+    21f6:	00000013          	nop
+    21fa:	00000013          	nop
+    21fe:	00000013          	nop
+    2202:	00000013          	nop
+    2206:	00000013          	nop
+    220a:	00000013          	nop
+    220e:	00000013          	nop
+    2212:	00000013          	nop
+    2216:	00000013          	nop
+    221a:	00000013          	nop
+    221e:	00000013          	nop
+    2222:	00000013          	nop
+    2226:	00000013          	nop
+    222a:	00000013          	nop
+    222e:	00000013          	nop
+    2232:	00000013          	nop
+    2236:	00000013          	nop
+    223a:	00000013          	nop
+    223e:	00000013          	nop
+    2242:	00000013          	nop
+    2246:	00000013          	nop
+    224a:	00000013          	nop
+    224e:	00000013          	nop
+    2252:	00000013          	nop
+    2256:	00000013          	nop
+    225a:	00000013          	nop
+    225e:	00000013          	nop
+    2262:	00000013          	nop
+    2266:	00000013          	nop
+    226a:	00000013          	nop
+    226e:	00000013          	nop
+    2272:	00000013          	nop
+    2276:	00000013          	nop
+    227a:	00000013          	nop
+    227e:	00000013          	nop
+    2282:	00000013          	nop
+    2286:	00000013          	nop
+    228a:	00000013          	nop
+    228e:	00000013          	nop
+    2292:	00000013          	nop
+    2296:	00000013          	nop
+    229a:	00000013          	nop
+    229e:	00000013          	nop
+    22a2:	00000013          	nop
+    22a6:	00000013          	nop
+    22aa:	00000013          	nop
+    22ae:	00000013          	nop
+    22b2:	00000013          	nop
+    22b6:	00000013          	nop
+    22ba:	00000013          	nop
+    22be:	00000013          	nop
+    22c2:	00000013          	nop
+    22c6:	00000013          	nop
+    22ca:	00000013          	nop
+    22ce:	00000013          	nop
+    22d2:	00000013          	nop
+    22d6:	00000013          	nop
+    22da:	00000013          	nop
+    22de:	00000013          	nop
+    22e2:	00000013          	nop
+    22e6:	00000013          	nop
+    22ea:	00000013          	nop
+    22ee:	00000013          	nop
+    22f2:	00000013          	nop
+    22f6:	00000013          	nop
+    22fa:	00000013          	nop
+    22fe:	00000013          	nop
+    2302:	00000013          	nop
+    2306:	00000013          	nop
+    230a:	00000013          	nop
+    230e:	00000013          	nop
+    2312:	00000013          	nop
+    2316:	00000013          	nop
+    231a:	00000013          	nop
+    231e:	00000013          	nop
+    2322:	00000013          	nop
+    2326:	00000013          	nop
+    232a:	00000013          	nop
+    232e:	00000013          	nop
+    2332:	00000013          	nop
+    2336:	00000013          	nop
+    233a:	00000013          	nop
+    233e:	00000013          	nop
+    2342:	00000013          	nop
+    2346:	00000013          	nop
+    234a:	00000013          	nop
+    234e:	00000013          	nop
+    2352:	00000013          	nop
+    2356:	00000013          	nop
+    235a:	00000013          	nop
+    235e:	00000013          	nop
+    2362:	00000013          	nop
+    2366:	00000013          	nop
+    236a:	00000013          	nop
+    236e:	00000013          	nop
+    2372:	00000013          	nop
+    2376:	00000013          	nop
+    237a:	00000013          	nop
+    237e:	00000013          	nop
+    2382:	00000013          	nop
+    2386:	00000013          	nop
+    238a:	00000013          	nop
+    238e:	00000013          	nop
+    2392:	00000013          	nop
+    2396:	00000013          	nop
+    239a:	00000013          	nop
+    239e:	00000013          	nop
+    23a2:	00000013          	nop
+    23a6:	00000013          	nop
+    23aa:	00000013          	nop
+    23ae:	00000013          	nop
+    23b2:	00000013          	nop
+    23b6:	00000013          	nop
+    23ba:	00000013          	nop
+    23be:	00000013          	nop
+    23c2:	00000013          	nop
+    23c6:	00000013          	nop
+    23ca:	00000013          	nop
+    23ce:	00000013          	nop
+    23d2:	00000013          	nop
+    23d6:	00000013          	nop
+    23da:	00000013          	nop
+    23de:	00000013          	nop
+    23e2:	00000013          	nop
+    23e6:	00000013          	nop
+    23ea:	00000013          	nop
+    23ee:	00000013          	nop
+    23f2:	00000013          	nop
+    23f6:	00000013          	nop
+    23fa:	00000013          	nop
+    23fe:	00000013          	nop
+    2402:	00000013          	nop
+    2406:	00000013          	nop
+    240a:	00000013          	nop
+    240e:	00000013          	nop
+    2412:	00000013          	nop
+    2416:	00000013          	nop
+    241a:	00000013          	nop
+    241e:	00000013          	nop
+    2422:	00000013          	nop
+    2426:	00000013          	nop
+    242a:	00000013          	nop
+    242e:	00000013          	nop
+    2432:	00000013          	nop
+    2436:	00000013          	nop
+    243a:	00000013          	nop
+    243e:	00000013          	nop
+    2442:	00000013          	nop
+    2446:	00000013          	nop
+    244a:	00000013          	nop
+    244e:	00000013          	nop
+    2452:	00000013          	nop
+    2456:	00000013          	nop
+    245a:	00000013          	nop
+    245e:	00000013          	nop
+    2462:	00000013          	nop
+    2466:	00000013          	nop
+    246a:	00000013          	nop
+    246e:	00000013          	nop
+    2472:	00000013          	nop
+    2476:	00000013          	nop
+    247a:	00000013          	nop
+    247e:	00000013          	nop
+    2482:	00000013          	nop
+    2486:	00000013          	nop
+    248a:	00000013          	nop
+    248e:	00000013          	nop
+    2492:	00000013          	nop
+    2496:	00000013          	nop
+    249a:	00000013          	nop
+    249e:	00000013          	nop
+    24a2:	00000013          	nop
+    24a6:	00000013          	nop
+    24aa:	00000013          	nop
+    24ae:	00000013          	nop
+    24b2:	00000013          	nop
+    24b6:	00000013          	nop
+    24ba:	00000013          	nop
+    24be:	00000013          	nop
+    24c2:	00000013          	nop
+    24c6:	00000013          	nop
+    24ca:	00000013          	nop
+    24ce:	00000013          	nop
+    24d2:	00000013          	nop
+    24d6:	00000013          	nop
+    24da:	00000013          	nop
+    24de:	00000013          	nop
+    24e2:	00000013          	nop
+    24e6:	00000013          	nop
+    24ea:	00000013          	nop
+    24ee:	00000013          	nop
+    24f2:	00000013          	nop
+    24f6:	00000013          	nop
+    24fa:	00000013          	nop
+    24fe:	00000013          	nop
+    2502:	00000013          	nop
+    2506:	00000013          	nop
+    250a:	00000013          	nop
+    250e:	00000013          	nop
+    2512:	00000013          	nop
+    2516:	00000013          	nop
+    251a:	00000013          	nop
+    251e:	00000013          	nop
+    2522:	00000013          	nop
+    2526:	00000013          	nop
+    252a:	00000013          	nop
+    252e:	00000013          	nop
+    2532:	00000013          	nop
+    2536:	00000013          	nop
+    253a:	00000013          	nop
+    253e:	00000013          	nop
+    2542:	00000013          	nop
+    2546:	00000013          	nop
+    254a:	00000013          	nop
+    254e:	00000013          	nop
+    2552:	00000013          	nop
+    2556:	00000013          	nop
+    255a:	00000013          	nop
+    255e:	00000013          	nop
+    2562:	00000013          	nop
+    2566:	00000013          	nop
+    256a:	00000013          	nop
+    256e:	00000013          	nop
+    2572:	00000013          	nop
+    2576:	00000013          	nop
+    257a:	00000013          	nop
+    257e:	00000013          	nop
+    2582:	00000013          	nop
+    2586:	00000013          	nop
+    258a:	00000013          	nop
+    258e:	00000013          	nop
+    2592:	00000013          	nop
+    2596:	00000013          	nop
+    259a:	00000013          	nop
+    259e:	00000013          	nop
+    25a2:	00000013          	nop
+    25a6:	00000013          	nop
+    25aa:	00000013          	nop
+    25ae:	00000013          	nop
+    25b2:	00000013          	nop
+    25b6:	00000013          	nop
+    25ba:	00000013          	nop
+    25be:	00000013          	nop
+    25c2:	00000013          	nop
+    25c6:	00000013          	nop
+    25ca:	00000013          	nop
+    25ce:	00000013          	nop
+    25d2:	00000013          	nop
+    25d6:	00000013          	nop
+    25da:	00000013          	nop
+    25de:	00000013          	nop
+    25e2:	00000013          	nop
+    25e6:	00000013          	nop
+    25ea:	00000013          	nop
+    25ee:	00000013          	nop
+    25f2:	00000013          	nop
+    25f6:	00000013          	nop
+    25fa:	00000013          	nop
+    25fe:	00000013          	nop
+    2602:	00000013          	nop
+    2606:	00000013          	nop
+    260a:	00000013          	nop
+    260e:	00000013          	nop
+    2612:	00000013          	nop
+    2616:	00000013          	nop
+    261a:	00000013          	nop
+    261e:	00000013          	nop
+    2622:	00000013          	nop
+    2626:	00000013          	nop
+    262a:	00000013          	nop
+    262e:	00000013          	nop
+    2632:	00000013          	nop
+    2636:	00000013          	nop
+    263a:	00000013          	nop
+    263e:	00000013          	nop
+    2642:	00000013          	nop
+    2646:	00000013          	nop
+    264a:	00000013          	nop
+    264e:	00000013          	nop
+    2652:	00000013          	nop
+    2656:	00000013          	nop
+    265a:	00000013          	nop
+    265e:	00000013          	nop
+    2662:	00000013          	nop
+    2666:	00000013          	nop
+    266a:	00000013          	nop
+    266e:	00000013          	nop
+    2672:	00000013          	nop
+    2676:	00000013          	nop
+    267a:	00000013          	nop
+    267e:	00000013          	nop
+    2682:	00000013          	nop
+    2686:	00000013          	nop
+    268a:	00000013          	nop
+    268e:	00000013          	nop
+    2692:	00000013          	nop
+    2696:	00000013          	nop
+    269a:	00000013          	nop
+    269e:	00000013          	nop
+    26a2:	00000013          	nop
+    26a6:	00000013          	nop
+    26aa:	00000013          	nop
+    26ae:	00000013          	nop
+    26b2:	00000013          	nop
+    26b6:	00000013          	nop
+    26ba:	00000013          	nop
+    26be:	00000013          	nop
+    26c2:	00000013          	nop
+    26c6:	00000013          	nop
+    26ca:	00000013          	nop
+
+Дизассемблирование раздела .text:
+
+00002700 <_run_test>:
+    2700:	00200e13          	li	t3,2
+
+00002704 <bad2>:
+    2704:	0000                	.insn	2, 0x0000
+    2706:	0000                	.insn	2, 0x0000
+    2708:	0f40006f          	j	27fc <fail>
+    270c:	000022b7          	lui	t0,0x2
+    2710:	80028293          	addi	t0,t0,-2048 # 1800 <STACK_SIZE+0x1400>
+    2714:	3002b073          	csrc	mstatus,t0
+    2718:	00001337          	lui	t1,0x1
+    271c:	80030313          	addi	t1,t1,-2048 # 800 <STACK_SIZE+0x400>
+    2720:	30032073          	csrs	mstatus,t1
+    2724:	300023f3          	csrr	t2,mstatus
+    2728:	0053f3b3          	and	t2,t2,t0
+    272c:	0e731063          	bne	t1,t2,280c <pass>
+
+00002730 <test_vectored_interrupts>:
+    2730:	34415073          	csrwi	mip,2
+    2734:	30415073          	csrwi	mie,2
+    2738:	00000297          	auipc	t0,0x0
+    273c:	1c928293          	addi	t0,t0,457 # 2901 <mtvec_handler+0x1>
+    2740:	30529473          	csrrw	s0,mtvec,t0
+    2744:	305022f3          	csrr	t0,mtvec
+    2748:	0012f293          	andi	t0,t0,1
+    274c:	00028663          	beqz	t0,2758 <msip>
+    2750:	30046073          	csrsi	mstatus,8
+    2754:	0000006f          	j	2754 <test_vectored_interrupts+0x24>
+
+00002758 <msip>:
+    2758:	30541073          	csrw	mtvec,s0
+    275c:	30315073          	csrwi	mideleg,2
+    2760:	00000297          	auipc	t0,0x0
+    2764:	02828293          	addi	t0,t0,40 # 2788 <msip+0x30>
+    2768:	34129073          	csrw	mepc,t0
+    276c:	000022b7          	lui	t0,0x2
+    2770:	80028293          	addi	t0,t0,-2048 # 1800 <STACK_SIZE+0x1400>
+    2774:	3002b073          	csrc	mstatus,t0
+    2778:	00001337          	lui	t1,0x1
+    277c:	80030313          	addi	t1,t1,-2048 # 800 <STACK_SIZE+0x400>
+    2780:	30032073          	csrs	mstatus,t1
+    2784:	30200073          	mret
+    2788:	10500073          	wfi
+
+0000278c <bad3>:
+    278c:	0000                	.insn	2, 0x0000
+    278e:	0000                	.insn	2, 0x0000
+    2790:	06c0006f          	j	27fc <fail>
+
+00002794 <bad4>:
+    2794:	10500073          	wfi
+    2798:	0640006f          	j	27fc <fail>
+    279c:	12000073          	sfence.vma
+    27a0:	180022f3          	csrr	t0,satp
+
+000027a4 <bad5>:
+    27a4:	0000                	.insn	2, 0x0000
+    27a6:	0000                	.insn	2, 0x0000
+    27a8:	0540006f          	j	27fc <fail>
+
+000027ac <bad6>:
+    27ac:	12000073          	sfence.vma
+    27b0:	04c0006f          	j	27fc <fail>
+
+000027b4 <bad7>:
+    27b4:	180022f3          	csrr	t0,satp
+    27b8:	0440006f          	j	27fc <fail>
+    27bc:	00000297          	auipc	t0,0x0
+    27c0:	02028293          	addi	t0,t0,32 # 27dc <bad8>
+    27c4:	14129073          	csrw	sepc,t0
+    27c8:	10000293          	li	t0,256
+    27cc:	1002a073          	csrs	sstatus,t0
+    27d0:	02000293          	li	t0,32
+    27d4:	1002b073          	csrc	sstatus,t0
+    27d8:	10200073          	sret
+
+000027dc <bad8>:
+    27dc:	0000                	.insn	2, 0x0000
+    27de:	0000                	.insn	2, 0x0000
+    27e0:	01c0006f          	j	27fc <fail>
+    27e4:	00000297          	auipc	t0,0x0
+    27e8:	01028293          	addi	t0,t0,16 # 27f4 <bad9+0x4>
+    27ec:	14129073          	csrw	sepc,t0
+
+000027f0 <bad9>:
+    27f0:	10200073          	sret
+    27f4:	0080006f          	j	27fc <fail>
+    27f8:	01c01a63          	bne	zero,t3,280c <pass>
+
+000027fc <fail>:
+    27fc:	0ff0000f          	fence
+    2800:	000e0593          	mv	a1,t3
+    2804:	00100513          	li	a0,1
+    2808:	00000073          	ecall
+
+0000280c <pass>:
+    280c:	0ff0000f          	fence
+    2810:	000e0593          	mv	a1,t3
+    2814:	00000513          	li	a0,0
+    2818:	00000073          	ecall
+    281c:	00000013          	nop
+    2820:	00000013          	nop
+    2824:	00000013          	nop
+    2828:	00000013          	nop
+    282c:	00000013          	nop
+    2830:	00000013          	nop
+    2834:	00000013          	nop
+    2838:	00000013          	nop
+    283c:	00000013          	nop
+    2840:	00000013          	nop
+    2844:	00000013          	nop
+    2848:	00000013          	nop
+    284c:	00000013          	nop
+    2850:	00000013          	nop
+    2854:	00000013          	nop
+    2858:	00000013          	nop
+    285c:	00000013          	nop
+    2860:	00000013          	nop
+    2864:	00000013          	nop
+    2868:	00000013          	nop
+    286c:	00000013          	nop
+    2870:	00000013          	nop
+    2874:	00000013          	nop
+    2878:	00000013          	nop
+    287c:	00000013          	nop
+    2880:	00000013          	nop
+    2884:	00000013          	nop
+    2888:	00000013          	nop
+    288c:	00000013          	nop
+    2890:	00000013          	nop
+    2894:	00000013          	nop
+    2898:	00000013          	nop
+    289c:	00000013          	nop
+    28a0:	00000013          	nop
+    28a4:	00000013          	nop
+    28a8:	00000013          	nop
+    28ac:	00000013          	nop
+    28b0:	00000013          	nop
+    28b4:	00000013          	nop
+    28b8:	00000013          	nop
+    28bc:	00000013          	nop
+    28c0:	00000013          	nop
+    28c4:	00000013          	nop
+    28c8:	00000013          	nop
+    28cc:	00000013          	nop
+    28d0:	00000013          	nop
+    28d4:	00000013          	nop
+    28d8:	00000013          	nop
+    28dc:	00000013          	nop
+    28e0:	00000013          	nop
+    28e4:	00000013          	nop
+    28e8:	00000013          	nop
+    28ec:	00000013          	nop
+    28f0:	00000013          	nop
+    28f4:	00000013          	nop
+    28f8:	00000013          	nop
+    28fc:	00000013          	nop
+
+00002900 <mtvec_handler>:
+    2900:	0400006f          	j	2940 <synchronous_exception>
+    2904:	e55ff06f          	j	2758 <msip>
+    2908:	ef5ff06f          	j	27fc <fail>
+    290c:	ef1ff06f          	j	27fc <fail>
+    2910:	eedff06f          	j	27fc <fail>
+    2914:	ee9ff06f          	j	27fc <fail>
+    2918:	ee5ff06f          	j	27fc <fail>
+    291c:	ee1ff06f          	j	27fc <fail>
+    2920:	eddff06f          	j	27fc <fail>
+    2924:	ed9ff06f          	j	27fc <fail>
+    2928:	ed5ff06f          	j	27fc <fail>
+    292c:	ed1ff06f          	j	27fc <fail>
+    2930:	ecdff06f          	j	27fc <fail>
+    2934:	ec9ff06f          	j	27fc <fail>
+    2938:	ec5ff06f          	j	27fc <fail>
+    293c:	ec1ff06f          	j	27fc <fail>
+
+00002940 <synchronous_exception>:
+    2940:	00200313          	li	t1,2
+    2944:	342022f3          	csrr	t0,mcause
+    2948:	ea629ae3          	bne	t0,t1,27fc <fail>
+    294c:	341022f3          	csrr	t0,mepc
+    2950:	343023f3          	csrr	t2,mtval
+    2954:	00038e63          	beqz	t2,2970 <synchronous_exception+0x30>
+    2958:	0002d303          	lhu	t1,0(t0)
+    295c:	0063c3b3          	xor	t2,t2,t1
+    2960:	0022d303          	lhu	t1,2(t0)
+    2964:	01031313          	slli	t1,t1,0x10
+    2968:	0063c3b3          	xor	t2,t2,t1
+    296c:	e80398e3          	bnez	t2,27fc <fail>
+    2970:	00000317          	auipc	t1,0x0
+    2974:	d9430313          	addi	t1,t1,-620 # 2704 <bad2>
+    2978:	04628e63          	beq	t0,t1,29d4 <synchronous_exception+0x94>
+    297c:	00000317          	auipc	t1,0x0
+    2980:	e1030313          	addi	t1,t1,-496 # 278c <bad3>
+    2984:	04628e63          	beq	t0,t1,29e0 <synchronous_exception+0xa0>
+    2988:	00000317          	auipc	t1,0x0
+    298c:	e0c30313          	addi	t1,t1,-500 # 2794 <bad4>
+    2990:	04628263          	beq	t0,t1,29d4 <synchronous_exception+0x94>
+    2994:	00000317          	auipc	t1,0x0
+    2998:	e1030313          	addi	t1,t1,-496 # 27a4 <bad5>
+    299c:	04628863          	beq	t0,t1,29ec <synchronous_exception+0xac>
+    29a0:	00000317          	auipc	t1,0x0
+    29a4:	e0c30313          	addi	t1,t1,-500 # 27ac <bad6>
+    29a8:	02628663          	beq	t0,t1,29d4 <synchronous_exception+0x94>
+    29ac:	00000317          	auipc	t1,0x0
+    29b0:	e0830313          	addi	t1,t1,-504 # 27b4 <bad7>
+    29b4:	02628063          	beq	t0,t1,29d4 <synchronous_exception+0x94>
+    29b8:	00000317          	auipc	t1,0x0
+    29bc:	e2430313          	addi	t1,t1,-476 # 27dc <bad8>
+    29c0:	02628c63          	beq	t0,t1,29f8 <synchronous_exception+0xb8>
+    29c4:	00000317          	auipc	t1,0x0
+    29c8:	e2c30313          	addi	t1,t1,-468 # 27f0 <bad9>
+    29cc:	02628c63          	beq	t0,t1,2a04 <synchronous_exception+0xc4>
+    29d0:	e2dff06f          	j	27fc <fail>
+    29d4:	00828293          	addi	t0,t0,8
+    29d8:	34129073          	csrw	mepc,t0
+    29dc:	30200073          	mret
+    29e0:	00200337          	lui	t1,0x200
+    29e4:	30032073          	csrs	mstatus,t1
+    29e8:	fedff06f          	j	29d4 <synchronous_exception+0x94>
+    29ec:	00100337          	lui	t1,0x100
+    29f0:	30032073          	csrs	mstatus,t1
+    29f4:	fe1ff06f          	j	29d4 <synchronous_exception+0x94>
+    29f8:	00400337          	lui	t1,0x400
+    29fc:	30032073          	csrs	mstatus,t1
+    2a00:	fd5ff06f          	j	29d4 <synchronous_exception+0x94>
+    2a04:	fd1ff06f          	j	29d4 <synchronous_exception+0x94>
+
+00002a08 <ecall>:
+    2a08:	00000073          	ecall
+    2a0c:	0001                	.insn	2, 0x0001
+    2a0e:	00000013          	nop
+    2a12:	00000013          	nop
+    2a16:	00000013          	nop
+    2a1a:	00000013          	nop
+    2a1e:	00000013          	nop
+    2a22:	00000013          	nop
+    2a26:	00000013          	nop
+    2a2a:	00000013          	nop
+    2a2e:	00000013          	nop
+    2a32:	00000013          	nop
+    2a36:	00000013          	nop
+    2a3a:	00000013          	nop
+    2a3e:	00000013          	nop
+    2a42:	00000013          	nop
+    2a46:	00000013          	nop
+    2a4a:	00000013          	nop
+    2a4e:	00000013          	nop
+    2a52:	00000013          	nop
+    2a56:	00000013          	nop
+    2a5a:	00000013          	nop
+    2a5e:	00000013          	nop
+    2a62:	00000013          	nop
+    2a66:	00000013          	nop
+    2a6a:	00000013          	nop
+    2a6e:	00000013          	nop
+    2a72:	00000013          	nop
+    2a76:	00000013          	nop
+    2a7a:	00000013          	nop
+    2a7e:	00000013          	nop
+    2a82:	00000013          	nop
+    2a86:	00000013          	nop
+    2a8a:	00000013          	nop
+    2a8e:	00000013          	nop
+    2a92:	00000013          	nop
+    2a96:	00000013          	nop
+    2a9a:	00000013          	nop
+    2a9e:	00000013          	nop
+    2aa2:	00000013          	nop
+    2aa6:	00000013          	nop
+    2aaa:	00000013          	nop
+    2aae:	00000013          	nop
+    2ab2:	00000013          	nop
+    2ab6:	00000013          	nop
+    2aba:	00000013          	nop
+    2abe:	00000013          	nop
+    2ac2:	00000013          	nop
+    2ac6:	00000013          	nop
+    2aca:	00000013          	nop
+    2ace:	00000013          	nop
+    2ad2:	00000013          	nop
+    2ad6:	00000013          	nop
+    2ada:	00000013          	nop
+    2ade:	00000013          	nop
+    2ae2:	00000013          	nop
+	...
+
+00002b00 <sc_exit>:
+    2b00:	ffffd297          	auipc	t0,0xffffd
+    2b04:	5f428293          	addi	t0,t0,1524 # f4 <SIM_EXIT>
+    2b08:	8282                	jr	t0
+    2b0a:	00000013          	nop
+    2b0e:	00000013          	nop
+    2b12:	00000013          	nop
+    2b16:	00000013          	nop
+    2b1a:	00000013          	nop
+    2b1e:	0001                	nop
+    2b20:	00000013          	nop
+    2b24:	00000013          	nop
+    2b28:	00000013          	nop
+    2b2c:	00000013          	nop
+    2b30:	00000013          	nop
+    2b34:	00000013          	nop
+	...
+
+Дизассемблирование раздела .data:
+
+00002b40 <begin_regstate>:
+	...
+
+Дизассемблирование раздела .tohost:
+
+00002b80 <tohost>:
+	...
+
+00002bc0 <fromhost>:
+	...
+
+Дизассемблирование раздела .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	5841                	li	a6,-16
+   2:	0000                	unimp
+   4:	7200                	flw	fs0,32(a2)
+   6:	7369                	lui	t1,0xffffa
+   8:	01007663          	bgeu	zero,a6,14 <CL_SIZE-0xc>
+   c:	004e                	c.slli	zero,0x13
+   e:	0000                	unimp
+  10:	7205                	lui	tp,0xfffe1
+  12:	3376                	.insn	2, 0x3376
+  14:	6932                	flw	fs2,12(sp)
+  16:	7032                	flw	ft0,44(sp)
+  18:	5f31                	li	t5,-20
+  1a:	326d                	jal	fffff9c4 <__global_pointer$+0xffffc5fc>
+  1c:	3070                	.insn	2, 0x3070
+  1e:	665f 7032 5f32      	.insn	6, 0x5f327032665f
+  24:	30703263          	.insn	4, 0x30703263
+  28:	7a5f 6369 7273      	.insn	6, 0x727363697a5f
+  2e:	7032                	flw	ft0,44(sp)
+  30:	5f30                	lw	a2,120(a4)
+  32:	697a                	flw	fs2,156(sp)
+  34:	6566                	flw	fa0,88(sp)
+  36:	636e                	flw	ft6,216(sp)
+  38:	6965                	lui	s2,0x19
+  3a:	7032                	flw	ft0,44(sp)
+  3c:	5f30                	lw	a2,120(a4)
+  3e:	6d7a                	flw	fs10,156(sp)
+  40:	756d                	lui	a0,0xffffb
+  42:	316c                	.insn	2, 0x316c
+  44:	3070                	.insn	2, 0x3070
+  46:	7a5f 6163 7031      	.insn	6, 0x703161637a5f
+  4c:	5f30                	lw	a2,120(a4)
+  4e:	637a                	flw	ft6,156(sp)
+  50:	3166                	.insn	2, 0x3166
+  52:	3070                	.insn	2, 0x3070
+  54:	0800                	addi	s0,sp,16
+  56:	0a01                	addi	s4,s4,0
+  58:	0b                	.byte	0x0b

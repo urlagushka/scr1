@@ -103,7 +103,7 @@
 
 #define RVTEST_CODE_BEGIN                                               \
         .section .text.init;                                            \
-        .org 0xC0, 0x00;                                                \
+        .org 0x80, 0x00;                                                \
         .balign  64;                                                    \
         .weak stvec_handler;                                            \
         .weak mtvec_handler;                                            \
@@ -116,6 +116,17 @@ trap_vector:                                                            \
         beq a4, a5, _report;                                            \
         li a5, CAUSE_MACHINE_ECALL;                                     \
         beq a4, a5, _report;                                            \
+        li a5, CAUSE_ILLEGAL_INSTRUCTION;                               \
+        bne a4, a5, 2f;                                                 \
+        li a5, 0xF0000000;                                              \
+        li a4, 'i';  sb a4, 0(a5);                                      \
+        li a4, 'l';  sb a4, 0(a5);                                      \
+        li a4, 'l';  sb a4, 0(a5);                                      \
+        li a4, 'e';  sb a4, 0(a5);                                      \
+        li a4, 'x';  sb a4, 0(a5);                                      \
+        li a4, 'c';  sb a4, 0(a5);                                      \
+        li a4, '\n'; sb a4, 0(a5);                                      \
+2:                                                                      \
         /* if an mtvec_handler is defined, jump to it */                \
         la a4, mtvec_handler;                                           \
         beqz a4, 1f;                                                    \
@@ -131,7 +142,7 @@ other_exception:                                                        \
         li   a0, 0x1;                                                   \
 _report:                                                                \
         j sc_exit;                                                      \
-        .balign  64;                                                    \
+        .balign  0x800;                                                 \
         .globl _start;                                                  \
 _start:                                                                 \
         RISCV_MULTICORE_DISABLE;                                        \
